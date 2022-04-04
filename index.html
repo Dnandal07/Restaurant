@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8 border">
+                <div class="row">
+                    <div class="col-3 my-2 ml-5">
+                        <label for="Name">Name</label>
+                    </div>
+                    <div class="col-8 my-2 text-center">
+                        <input type="text" name="name" id="name1">
+                    </div>
+                    <div class="col-3 ml-5">
+                        <label for="mobile">Mobile No.</label>
+                    </div>
+                    <div class="col-8 text-center">
+                        <input type="number" name="mobile" min="0" id="mobile_number">
+                    </div>
+                    <div class="col-12 my-2 text-right">
+                        <button type="button" class="btn btn-primary" id="add" data-toggle="modal"
+                            data-target="#myModal">Add</button>
+                    </div>
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+                            <div class="d-flex col-7">
+                                <ul class="navbar-nav row">
+                                    <li class="nav-item col-4">
+                                        <a class="nav-link mx-5" href="#" id="ib">Burger</a>
+                                    </li>
+                                    <li class="nav-item col-4">
+                                        <a class="nav-link mx-5" href="#" id="is">Sandwich</a>
+                                    </li>
+                                    <li class="nav-item col-4">
+                                        <a class="nav-link mx-5" href="#" id="ij">Juice</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="left_data col-12">
+
+                    </div>
+                    <div class="col-12">
+                        <table class="table table-striped bg-light">
+                            <thead>
+                                <th>Choose</th>
+                                <th>Item</th>
+                                <th>Type</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <div class="bill text-right">
+                            <button type="button" class="btn btn-primary" id="generate_bill">Generate Bill</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right_data col-4">
+
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
