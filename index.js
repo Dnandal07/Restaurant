@@ -1,3 +1,4 @@
+var ViewBill = [];
 $("#add").click(function () {
   var name = "";
   name = $("#name1").val();
@@ -41,97 +42,103 @@ $("#add").click(function () {
   }
 })
 
-function BurgerItem(){
+function BurgerItem() {
   $("#dropdownmodal").text('Burger');
 }
 
-function SandwichItem(){
+function SandwichItem() {
   $("#dropdownmodal").text('Sandwich');
 }
 
-function JuiceItem(){
+function JuiceItem() {
   $("#dropdownmodal").text('Juice');
 }
 
-var it=[];
-var iobj={};
+var it = [];
+var iobj = {};
 
-function Submit(){
-  $("tbody").empty();
-  iobj.item= $("#dropdownmodal").text();
-  iobj.type= $("#item_type_name").val();
-  iobj.price= $("#item_type_price").val();
+function Submit() {
+  $("#item_table").empty();
+  iobj.item = $("#dropdownmodal").text();
+  iobj.type = $("#item_type_name").val();
+  iobj.price = $("#item_type_price").val();
   it.push(iobj);
-  iobj={};
+  iobj = {};
   $("#dropdownmodal").text('Item');
   $("#item_type_name").val('');
   $("#item_type_price").val('');
-  it.forEach(function(element, index){
+  it.forEach(function (element, index) {
     AppendTable(index);
   })
+  $(".Sandwich").hide();
+  $(".Juice").hide();
 }
 
-$("#ib").click(function(){
-    $(".Sandwich").hide();
-    $(".Juice").hide();
-    $(".Burger").show();
+$("#ib").click(function () {
+  $(".Sandwich").hide();
+  $(".Juice").hide();
+  $(".Burger").show();
 })
 
 
-$("#is").click(function(){
-    $(".Sandwich").show();
-    $(".Juice").hide();
-    $(".Burger").hide();
+$("#is").click(function () {
+  $(".Sandwich").show();
+  $(".Juice").hide();
+  $(".Burger").hide();
 })
 
-$("#ij").click(function(){
-    $(".Sandwich").hide();
-    $(".Juice").show();
-    $(".Burger").hide();
+$("#ij").click(function () {
+  $(".Sandwich").hide();
+  $(".Juice").show();
+  $(".Burger").hide();
 })
 
-function AppendTable(index){
-  $("tbody").append(`<tr class="${it[index].item}">
+function AppendTable(index) {
+  $("#item_table").append(`<tr class="${it[index].item}">
   <td><input type="checkbox" name="check" id="cb${index}" onclick="Check(${index})"></td>
   <td>${it[index].item}</td>
   <td>${it[index].type}</td>
-  <td><input type="number" min="0" name="quantity" id="qnt${index}" readonly></td>
+  <td><input type="number" min="0" name="quantity" id="qnt${index}" min="0" max="20" readonly></td>
   <td id="price${index}">${it[index].price}</td>
   </tr>`)
 }
 
-function Check(index){
-  var b= $("#cb"+index).prop("checked");
-  if(b==true){
-    $("#qnt"+index).prop('readonly', false);
-    $("#qnt"+index).val('1');
+function Check(index) {
+  var b = $("#cb" + index).prop("checked");
+  if (b == true) {
+    $("#qnt" + index).prop('readonly', false);
+    $("#qnt" + index).val('1');
   }
-  else{
-    $("#qnt"+index).prop('readonly', true);
-    $("#qnt"+index).val('');
+  else {
+    $("#qnt" + index).prop('readonly', true);
+    $("#qnt" + index).val('');
   }
 }
 
-var bit=[];
-var bobj={};
-$("#generate_bill").click(function(){
-  bit=[];
+var bit = [];
+var bobj = {};
+$("#generate_bill").click(function () {
+  bit = [];
   $(".bill_table").empty();
   $(".right_data").empty();
-  it.forEach(function(element, index){
-    if($("#cb"+index).prop('checked') ==true){
+  it.forEach(function (element, index) {
+    if ($("#cb" + index).prop('checked') == true) {
       bobj.item = it[index].item;
       bobj.type = it[index].type;
       bobj.price = it[index].price;
-      bobj.quantity = $("#qnt"+index).val();
+      bobj.quantity = $("#qnt" + index).val();
       bit.push(bobj);
-      bobj={};
+      bobj = {};
     }
+    $("#cb" + index).prop('checked', false);
+    $("#qnt" + index).val('');
   })
 
-  var bname=$("#name1").val();
-  var bmobile=$("#mobile_number").val();
-  $(".right_data").append(`<h3 class="text-center font-weight-bold"> DN's Restaurant </h3>
+  var bname = $("#name1").val();
+  var bmobile = $("#mobile_number").val();
+  $(".right_data").append(`<div class="card">
+  <div class="card-body">
+  <h3 class="text-center font-weight-bold"> DN's Restaurant </h3>
   <h5 class="text-center"> 1215/55 M Tower Sector 91, </h5>
   <h5 class="text-center"> S.A.S. Nagar (Punjab) </h5>
   <div class="row mt-3">
@@ -163,12 +170,14 @@ $("#generate_bill").click(function(){
         </tbody>
     </table>
   </div>
+  </div>
+  </div>
   </div>`);
-  var total=0;
-  bit.forEach(function(element, index){
-    var pr= bit[index].price;
-    var qn= bit[index].quantity;
-    var am= pr*qn;
+  var total = 0;
+  bit.forEach(function (element, index) {
+    var pr = bit[index].price;
+    var qn = bit[index].quantity;
+    var am = pr * qn;
     $(".bill_table").append(`<tr>
     <td>${bit[index].item}</td>
     <td>${bit[index].type}</td>
@@ -176,9 +185,38 @@ $("#generate_bill").click(function(){
     <td>${bit[index].price}</td>
     <td>${am}</td>
     </tr>`);
-    total=total+am;
+    total = total + am;
   })
   $(".bill_table").append(`<tr>
   <td colspan="4"> Total </td>
   <td> ${total} </td>`);
+  $("#name1").val('');
+  $("#mobile_number").val('');
+  var a = $(".right_data").html();
+  ViewBill.push(a);
+})
+
+$("#view_bill").click(function(){
+  $(".right_data").append(`<div class="modal" id="myModal1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">All Bills</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body modalbody">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+  </div>`)
+  var dataView="";
+   ViewBill.forEach(function (element, index) {
+    dataView+=ViewBill[index];
+  })
+$(".modalbody").append(dataView);
 })
