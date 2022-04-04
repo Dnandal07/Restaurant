@@ -36,7 +36,7 @@
                         <label for="mobile">Mobile No.</label>
                     </div>
                     <div class="col-8 text-center">
-                        <input type="number" name="mobile" min="0" id="mobile_number">
+                        <input type="text" name="mobile" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  maxlength="10" id="mobile_number">
                     </div>
                     <div class="col-12 my-2 text-right">
                         <button type="button" class="btn btn-primary" id="add" data-toggle="modal"
@@ -71,11 +71,12 @@
                                 <th>Quantity</th>
                                 <th>Price</th>
                             </thead>
-                            <tbody>
+                            <tbody id="item_table">
 
                             </tbody>
                         </table>
                         <div class="bill text-right">
+                            <button type="button" class="btn btn-primary" id="view_bill" data-toggle="modal" data-target="#myModal1">View All Bills</button>
                             <button type="button" class="btn btn-primary" id="generate_bill">Generate Bill</button>
                         </div>
                     </div>
